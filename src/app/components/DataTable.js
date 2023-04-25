@@ -6,6 +6,7 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
   createColumnHelper,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 const Table = ({
@@ -51,6 +52,7 @@ const Table = ({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
   return (
     <div fluid>
@@ -80,17 +82,6 @@ const Table = ({
                 </label>
               </div>
             </form>
-            {/* <Form className="align-items-center d-flex w-100">
-              <Form.Control
-                type="text"
-                size="md"
-                placeholder={searchLabel}
-                onChange={(e) => setGlobalFilter(e.target.value)}
-              />
-              <span className="search-link mt-2 mr-2">
-                <SearchIcon />
-              </span>
-            </Form> */}
           </div>
         )}
       </div>
@@ -192,6 +183,67 @@ const Table = ({
             </tr>
           ))}
         </tfoot>
+        <nav
+          class="flex items-center justify-between pt-4 gap-4 mr-4"
+          aria-label="Table navigation"
+        >
+          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            Showing{" "}
+            <span class="font-semibold text-gray-900 dark:text-white">
+              {table.getState().pagination.pageIndex + 1}
+            </span>{" "}
+            of{" "}
+            <span class="font-semibold text-gray-900 dark:text-white">
+              {table.getPageCount()}
+            </span>
+          </span>
+          <span className="inline-flex items-center">
+            <button
+              className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<<"}
+            </button>
+            <button
+              className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </button>
+            <button
+              className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </button>
+            <button
+              className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+            >
+              {">>"}
+            </button>
+          </span>
+
+          <span className="inline-flex items-center">
+            <select
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </span>
+        </nav>
       </table>
     </div>
   );

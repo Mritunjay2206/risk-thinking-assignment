@@ -40,7 +40,7 @@ export default function HomePage() {
         htmlFor="countries_multiple"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
-        Select an option
+        Select Year
       </label>
       <select
         onChange={handleChange}

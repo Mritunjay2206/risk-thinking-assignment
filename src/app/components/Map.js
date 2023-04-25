@@ -1,31 +1,4 @@
 "use client"; // this is a client component
-import { useEffect, useState } from "react";
-import { Loader } from "@googlemaps/js-api-loader";
-
-// const Map = ({ locationData }) => {
-//   const [map, setMap] = useState(null);
-
-//   useEffect(() => {
-//     const loader = new Loader({
-//       apiKey: "AIzaSyAX5T9cJhtCviNoUTi4z9d9coNAMlqwOrc",
-//       version: "weekly",
-//     });
-
-//     loader.load().then(() => {
-//       const mapInstance = new window.google.maps.Map(
-//         document.getElementById("map"),
-//         {
-//           center: { lat: 37.7749, lng: -122.4194 },
-//           zoom: 8,
-//         }
-//       );
-
-//       setMap(mapInstance);
-//     });
-//   }, []);
-
-//   return <div id="map" style={{ height: "500px", width: "600px" }} />;
-// };
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import ScalableMarker from "./ScalingSvg";
 const Map = ({ locations, handleMarkerClick }) => {
