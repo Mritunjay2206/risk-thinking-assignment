@@ -20,7 +20,7 @@ function ScalableMarker(props) {
         onMouseOut={handleMouseOut}
         onClick={handleClick}
       />
-      {isOpen && (
+      {/* {isOpen && (
         <InfoWindow
           onClick={handleClick}
           position={position}
@@ -28,7 +28,7 @@ function ScalableMarker(props) {
         >
           <div style={{ color: "black" }}>{tooltipText}</div>
         </InfoWindow>
-      )}
+      )} */}
     </>
   );
 }
